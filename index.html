@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Time HTML Execution</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+  #output, #input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    min-height: 100px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .style {
+    font-family: "Poppins", sans-serif;
+  }
+</style>
+</head>
+<body>
+<h2 class="style">Real-Time HTML Execution</h2>
+<p class="style">Masukkan kode HTML di bawah ini:</p>
+<textarea id="input" rows="10" cols="50" class="style"></textarea>
+<div id="output"></div>
+<div id="stats" class="style"></div>
+
+<script>
+var inputTextarea = document.getElementById("input");
+var outputDiv = document.getElementById("output");
+var statsDiv = document.getElementById("stats");
+
+function runHTML() {
+  var inputCode = inputTextarea.value;
+  outputDiv.innerHTML = inputCode;
+
+  var charCount = inputCode.length;
+
+  var lineCount = inputCode.split(/\r\n|\r|\n/).length;
+
+  var tagCount = (inputCode.match(/<[^>]*>/g) || []).length;
+
+  statsDiv.innerHTML = "<strong>Stats:</strong><br>" +
+                       "Panjang karakter: " + charCount + "<br>" +
+                       "Total baris: " + lineCount + "<br>" +
+                       "Total tag HTML: " + tagCount;
+}
+
+runHTML();
+
+inputTextarea.addEventListener("input", runHTML);
+</script>
+</body>
+</html>
